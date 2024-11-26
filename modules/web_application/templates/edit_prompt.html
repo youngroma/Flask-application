@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Prompt{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Edit Prompt</h2>
+
+    {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('views.edit_prompt', prompt_id=prompt.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <div class="form-group mb-3">
+            <label for="prompt_text">Prompt Text:</label>
+            <textarea id="prompt_text" name="prompt_text" class="form-control" rows="4" required>{{ prompt.prompt_text }}</textarea>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="generated_output">Generated Output:</label>
+            <textarea id="generated_output" name="generated_output" class="form-control" rows="4" required>{{ prompt.generated_output }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="/dashboard" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

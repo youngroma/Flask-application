@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to the Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Welcome, {{ session['name'] }}!</h1>
+    <p>Here you can manage your scraped data and generated prompts.</p>
+
+    <div class="mb-3">
+        <a href="/scrape_page" class="btn btn-primary">Start Scraping</a>
+        <a href="/generate" class="btn btn-secondary">Generate Prompt</a>
+    </div>
+{% endblock %}

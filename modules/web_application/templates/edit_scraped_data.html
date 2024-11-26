@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Scraped Data{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Edit Scraped Data</h2>
+    <form method="POST" action="{{ url_for('views.edit_scraped_data', data_id=data.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-group mb-3">
+            <label for="url">Edit URL:</label>
+            <input type="text" id="url" name="url" class="form-control" value="{{ data.url }}" required>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" class="form-control" value="{{ data.scraped_metadata['title'] }}">
+        </div>
+        <div class="form-group mb-3">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" class="form-control">{{ data.scraped_metadata['description'] }}</textarea>
+        </div>
+        <div class="form-group mb-3">
+            <label for="keywords">Keywords:</label>
+            <input type="text" id="keywords" name="keywords" class="form-control" value="{{ data.scraped_metadata['keywords'] }}">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="contact">Contact Information:</label>
+            <input type="text" id="contact" name="contact" class="form-control" value="{{ data.contact }}">
+        </div>
+        <div class="form-group mb-3">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" value="{{ data.email }}">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="content">Content:</label>
+            <textarea id="content" name="content" class="form-control">{{ data.content }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="/dashboard" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

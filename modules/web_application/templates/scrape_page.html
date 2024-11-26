@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Scrape URL{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Scrape a URL</h2>
+
+    <form id="scrapeForm" method="POST">
+        <div class="form-group mb-3">
+            <label for="url">Enter URL:</label>
+            <input type="text" id="url" name="url" class="form-control" placeholder="https://example.com" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Scrape</button>
+    </form>
+
+    <div id="errorMessage" class="alert alert-danger mt-3 d-none"></div>
+
+    <div id="scrapedResults" class="mt-5 d-none">
+        <h3>Scraped Data</h3>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>Title</th>
+                    <td id="scrapedTitle"></td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td id="scrapedDescription"></td>
+                </tr>
+                <tr>
+                    <th>Keywords</th>
+                    <td id="scrapedKeywords"></td>
+                </tr>
+                <tr>
+                    <th>Contact</th>
+                    <td id="scrapedContact"></td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td id="scrapedEmail"></td>
+                </tr>
+                <tr>
+                    <th>Content (Preview)</th>
+                    <td id="scrapedContent"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+document.getElementById('scrapeForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    const url = document.getElementById('url').value;
+
+    document.getElementById('errorMessage').classList.add('d-none');
+    document.getElementById('scrapedResults').classList.add('d-none');
+
+    try {
+        const response = await fetch('/scrape', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `url=${encodeURIComponent(url)}`
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || 'An unexpected error occurred');
+        }
+
+        document.getElementById('scrapedTitle').textContent = data.scraped_metadata.title;
+        document.getElementById('scrapedDescription').textContent = data.scraped_metadata.description;
+        document.getElementById('scrapedKeywords').textContent = data.scraped_metadata.keywords;
+        document.getElementById('scrapedContact').textContent = data.scraped_data.contact;
+        document.getElementById('scrapedEmail').textContent = data.scraped_data.email;
+        document.getElementById('scrapedContent').textContent = data.scraped_data.page_content;
+
+        document.getElementById('scrapedResults').classList.remove('d-none');
+    } catch (error) {
+        const errorMessage = document.getElementById('errorMessage');
+        errorMessage.textContent = error.message;
+        errorMessage.classList.remove('d-none');
+    }
+});
+</script>
+{% endblock %}

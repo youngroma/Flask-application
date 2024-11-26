@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Dashboard</h1>
+
+    <div class="mb-3">
+        <a href="/" class="btn btn-primary">Home</a>
+        <a href="/logout" class="btn btn-danger">Logout</a>
+    </div>
+
+    <h2>Scraped URLs</h2>
+    {% if scraped_data %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>URL</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in scraped_data %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ data.url }}</td>
+                    <td>{{ data.scraped_metadata.title }}</td>
+                    <td>{{ data.scraped_metadata.description }}</td>
+                    <td>
+                        <td>
+                        <a href="{{ url_for('views.edit_scraped_data', data_id=data.id) }}" class="btn btn-warning">Edit</a>
+                        <form method="POST" action="{{ url_for('views.delete_scraped_data', data_id=data.id) }}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                </td>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No scraped data found.</p>
+    {% endif %}
+
+    <h2>Prompts and Generated Outputs</h2>
+    {% if prompts %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Prompt</th>
+                    <th>Response</th>
+                    <th>Tokens Used</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prompt in prompts %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ prompt.prompt_text }}</td>
+                    <td>{{ prompt.generated_output }}</td>
+                    <td>{{ prompt.tokens_used }}</td>
+                    <td>
+                        <td>
+                            <a href="/edit_prompt/{{ prompt.id }}" class="btn btn-sm btn-warning">Edit</a>
+                            <form method="POST" action="/delete_prompt/{{ prompt.id }}" style="display:inline;">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No prompts found.</p>
+    {% endif %}
+</div>
+{% endblock %}

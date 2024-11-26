@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Generate Prompt Response{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Generate Prompt Response</h1>
+
+    <form method="POST" id="prompt-form">
+        <div class="mb-3">
+            <label for="prompt" class="form-label">Enter your prompt:</label>
+            <textarea class="form-control" id="prompt" name="prompt" rows="3" required>{{ prompt_text or '' }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Generate</button>
+    </form>
+
+    {% if response %}
+    <div id="response-container" class="mt-4">
+        <h3>Generated Response</h3>
+        <p><strong>Response:</strong> {{ response }}</p>
+        <p><strong>Tokens Used:</strong> {{ tokens_used }}</p>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div id="error-container" class="mt-4 text-danger">
+        <h3>Error</h3>
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+
+    <div class="mt-4">
+        <p><strong>User ID:</strong> {{ user_id }}</p>
+    </div>
+</div>
+{% endblock %}
