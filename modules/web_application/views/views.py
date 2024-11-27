@@ -30,7 +30,7 @@ def login():
     session["state"] = state
     return redirect(authorization_url)
 
-CLIENT_ID = os.getenv("CLIENT_ID")
+CLIENT_ID = os.getenv("CLIENT_ID") #
 @views.route('/callback')
 def callback():
     from app import flow
@@ -47,7 +47,7 @@ def callback():
     id_info = id_token.verify_oauth2_token(
         id_token=credentials._id_token,
         request=token_request,
-        audience=CLIENT_ID
+        audience=CLIENT_ID      #from .env
     )
 
     google_id = id_info.get("sub")

@@ -33,7 +33,7 @@ def create_app():
 
     return app
 
-GOOGLE_CLIENT_ID = "148242393821-s97cgabiiijvvk4jo7tifmibta210qdp.apps.googleusercontent.com"
+GOOGLE_CLIENT_ID = os.getenv("CLIENT_ID")
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
 
 from google_auth_oauthlib.flow import Flow
