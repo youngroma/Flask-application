@@ -29,3 +29,15 @@ docker build -t myapp .
 
 docker run -p 5000:5000 myapp
 
+
+
+
+
+Photos of web-app:
+
+![image](https://github.com/user-attachments/assets/16459693-6c72-4561-9e12-d28634ff4a94)
+![image](https://github.com/user-attachments/assets/7f16a919-63e8-45a3-90cb-79b48af2ed14)
+![image](https://github.com/user-attachments/assets/775ee051-7ba9-4746-953f-81907bc197d5)
+![image](https://github.com/user-attachments/assets/bc812bcc-4e35-49ad-8818-4a0f7e3a61f2)
+
+
