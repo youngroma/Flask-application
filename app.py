@@ -9,6 +9,8 @@ from modules.web_application.models.models import db
 from flask_wtf.csrf import CSRFProtect
 
 from modules.web_application.views.views import views
+
+
 def create_app():
     app = Flask(__name__, template_folder='modules/web_application/templates')
 

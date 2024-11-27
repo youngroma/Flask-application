@@ -1,3 +1,5 @@
+import os
+
 from flask import Blueprint, session, redirect, request, abort, render_template
 from modules.web_application.models.models import db, User, ScrapedData
 from google.auth.transport.requests import Request
@@ -28,6 +30,7 @@ def login():
     session["state"] = state
     return redirect(authorization_url)
 
+CLIENT_ID = os.getenv("CLIENT_ID")
 @views.route('/callback')
 def callback():
     from app import flow
@@ -44,7 +47,7 @@ def callback():
     id_info = id_token.verify_oauth2_token(
         id_token=credentials._id_token,
         request=token_request,
-        audience="148242393821-s97cgabiiijvvk4jo7tifmibta210qdp.apps.googleusercontent.com"
+        audience=CLIENT_ID
     )
 
     google_id = id_info.get("sub")
