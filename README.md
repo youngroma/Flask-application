@@ -1,10 +1,26 @@
-# Prerequisites:
+# Flask Application
+
+This project is a **Flask-based web application** that integrates **LangChain for AI prompting**, **web scraping**, and **Google OAuth authentication**.
+
+## Technologies Used
+- **Flask** – Web framework for handling API requests
+- **LangChain** – AI-powered prompting and processing
+- **BeautifulSoup** – Web scraping for extracting data
+- **OAuth 2.0 (Google Login)** – Secure authentication
+- **PostgreSQL** – Database for storing user and application data
+- **Docker** – Containerization for deployment
 
 ## Before setting up the application, ensure you have the following:
 
 - Python 3.10+ installed on your machine
 - Docker installed on your machine
 - An OpenAI API key
+
+## Features
+- AI Prompting: Uses LangChain to generate responses.
+- Web Scraping: Extracts content dynamically.
+- User Authentication: Secure login via Google OAuth.
+- Database Integration: Uses PostgreSQL for storing user data.
 
 # Setup Instructions
 
@@ -29,14 +45,5 @@ docker build -t myapp .
 docker run -p 5000:5000 myapp
 ```
 
-
-
-
-Photos of web-app:
-
-![image](https://github.com/user-attachments/assets/16459693-6c72-4561-9e12-d28634ff4a94)
-![image](https://github.com/user-attachments/assets/7f16a919-63e8-45a3-90cb-79b48af2ed14)
-![image](https://github.com/user-attachments/assets/775ee051-7ba9-4746-953f-81907bc197d5)
-![image](https://github.com/user-attachments/assets/bc812bcc-4e35-49ad-8818-4a0f7e3a61f2)
 
 
