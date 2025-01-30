@@ -18,9 +18,9 @@ OPENAI_API_KEY=your_openai_api_key
 ```
 # 2. Clone Repo
 ```bash
-git clone <repository_url>
+git clone https://github.com/youngroma/Flask-application.git
 
-cd <project_directory>
+cd Flask-application
 ```
 # 3. Build Docker image
 ```bash
